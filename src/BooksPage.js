@@ -13,8 +13,20 @@ class BooksPage extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          <BookShelf name={"Currently Reading"} books={[]} />
-          <BookShelf name={"Want to Read"} books={[]} />
+          <BookShelf
+            name={"Currently Reading"}
+            books={this.props.books.filter(
+              book => book.shelf === "currentlyReading"
+            )}
+          />
+          <BookShelf
+            name={"Want to Read"}
+            books={this.props.books.filter(book => book.shelf === "wantToRead")}
+          />
+          <BookShelf
+            name={"Read"}
+            books={this.props.books.filter(book => book.shelf === "read")}
+          />
         </div>
         <div className="open-search">
           <button onClick={this.props.toggleSearchPage}>Add a book</button>

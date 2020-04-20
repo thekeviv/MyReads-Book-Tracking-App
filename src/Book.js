@@ -5,10 +5,8 @@ class Book extends Component {
     shelfName: "default"
   };
 
-  changeShelf = newShelf => {
-    this.setState({
-      shelfName: newShelf
-    });
+  changeShelf = event => {
+    this.props.updateBookShelf(this.props.name, event.target.value);
   };
 
   static propTypes = {
@@ -29,7 +27,7 @@ class Book extends Component {
             }}
           />
           <div className="book-shelf-changer">
-            <select>
+            <select onChange={this.changeShelf}>
               <option value="move" disabled>
                 Move to...
               </option>

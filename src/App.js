@@ -27,6 +27,20 @@ class BooksApp extends React.Component {
     });
   };
 
+  updateBookShelf = (bookName, newShelfName) => {
+    let bookToUpdate = this.state.books.filter(
+      book => book.title === bookName
+    )[0];
+    bookToUpdate.shelf = newShelfName;
+    let bookRemovedFromShelf = this.state.books.filter(
+      currentBook => currentBook.title !== bookName
+    );
+    bookRemovedFromShelf.push(bookToUpdate);
+    this.setState({
+      books: bookRemovedFromShelf
+    });
+  };
+
   render() {
     return (
       <div className="app">
@@ -36,6 +50,9 @@ class BooksApp extends React.Component {
           <BooksPage
             toggleSearchPage={this.toggleSearchPage}
             books={this.state.books}
+            updateBookShelf={(bookName, newShelfName) =>
+              this.updateBookShelf(bookName, newShelfName)
+            }
           />
         )}
       </div>

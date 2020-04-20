@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import BookShelf from "./BookShelf";
 
 class BooksPage extends Component {
-  static propTypes = {};
+  static propTypes = {
+    toggleSearchPage: PropTypes.func.isRequired
+  };
   render() {
     return (
       <div className="list-books">
@@ -13,6 +15,9 @@ class BooksPage extends Component {
         <div className="list-books-content">
           <BookShelf name={"Currently Reading"} books={[]} />
           <BookShelf name={"Want to Read"} books={[]} />
+        </div>
+        <div className="open-search">
+          <button onClick={this.props.toggleSearchPage}>Add a book</button>
         </div>
       </div>
     );

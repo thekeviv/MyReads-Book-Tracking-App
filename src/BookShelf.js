@@ -20,6 +20,7 @@ class BookShelf extends Component {
                   author={book.author}
                   coverUrl={book.imageLinks.smallThumbnail}
                   updateBookShelf={this.props.updateBookShelf}
+                  shelf={book.shelf}
                 />
               </li>
             ))}

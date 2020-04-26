@@ -12,7 +12,7 @@ class Book extends Component {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    author: PropTypes.string,
     coverUrl: PropTypes.string.isRequired
   };
   render() {
@@ -28,8 +28,8 @@ class Book extends Component {
             }}
           />
           <div className="book-shelf-changer">
-            <select onChange={this.changeShelf}>
-              <option value="move" disabled selected>
+            <select onChange={this.changeShelf} value={this.props.shelf}>
+              <option value="move" disabled>
                 Move to...
               </option>
               <option value="currentlyReading">Currently Reading</option>

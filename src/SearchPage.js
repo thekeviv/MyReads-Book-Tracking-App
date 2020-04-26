@@ -8,6 +8,18 @@ class SearchPage extends Component {
     searchResults: []
   };
 
+  combineWithCurrentBookList = searchResults => {
+    searchResults.forEach(searchResult => {
+      searchResult.shelf = "None";
+      this.props.currentBooksList.forEach(currentBook => {
+        if (currentBook.title === searchResult.title) {
+          searchResult.shelf = currentBook.shelf;
+        }
+      });
+    });
+    return searchResults;
+  };
+
   getSearchBooksResults = async value => {
     let searchResults = await BooksAPI.search(value);
     return searchResults;
@@ -15,15 +27,18 @@ class SearchPage extends Component {
 
   onSearchEnter = async value => {
     let booksResults = await this.getSearchBooksResults(value);
-    booksResults && booksResults.length > 0
-      ? this.setState({
-          searchTerm: value,
-          searchResults: booksResults
-        })
-      : this.setState({
-          searchTerm: value,
-          searchResults: []
-        });
+    if (booksResults && booksResults.length > 0) {
+      booksResults = this.combineWithCurrentBookList(booksResults);
+      this.setState({
+        searchTerm: value,
+        searchResults: booksResults
+      });
+    } else {
+      this.setState({
+        searchTerm: value,
+        searchResults: []
+      });
+    }
   };
 
   render() {
@@ -57,6 +72,7 @@ class SearchPage extends Component {
                     author={book.author}
                     coverUrl={book.imageLinks.smallThumbnail}
                     updateBookShelf={this.props.updateBookShelf}
+                    shelf={book.shelf}
                   />
                 ) : (
                   <Book
@@ -64,6 +80,7 @@ class SearchPage extends Component {
                     author={book.author}
                     coverUrl={""}
                     updateBookShelf={this.props.updateBookShelf}
+                    shelf={book.shelf}
                   />
                 )}
               </li>

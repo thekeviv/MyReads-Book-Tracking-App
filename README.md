@@ -4,6 +4,8 @@ The goal of this project was to create a book tracking app. A server would host 
 
 This was done as a part of Udacity's Online React NanoDegree program. This was the final assignment of the React course of the Nanodegree program.
 
+![MyReadsDemo](my_reads_demo.gif)
+
 ### Things Learnt
 
 1. State Management
